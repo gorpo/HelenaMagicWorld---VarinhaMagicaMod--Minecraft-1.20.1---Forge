@@ -43,7 +43,7 @@ public class CraftEvents {
         var state =
                 level.getBlockState(pos);
 
-        if (CreatedBlocks.transform(
+        if (PremiumBlocks.transform(
                 level,
                 pos,
                 state

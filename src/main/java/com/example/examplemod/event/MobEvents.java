@@ -51,6 +51,13 @@ public class MobEvents {
         var target =
                 event.getTarget();
 
+        if (PremiumEnemies.transform(
+                level,
+                target
+        )) {
+            return;
+        }
+
         // WOLF
         if (target instanceof Wolf wolf) {
             PremiumWolf.transform(level, wolf);
@@ -204,6 +211,10 @@ public class MobEvents {
 
         var entity =
                 event.getEntity();
+
+        if (PremiumEnemies.dropPeacefulSet(entity)) {
+            return;
+        }
 
         // WOLF PREMIUM
         if (entity instanceof Wolf wolf

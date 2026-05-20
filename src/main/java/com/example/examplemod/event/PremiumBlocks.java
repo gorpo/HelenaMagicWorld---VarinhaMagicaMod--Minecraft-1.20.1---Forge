@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class CreatedBlocks {
+public class PremiumBlocks {
 
     public static boolean transform(
             Level level,
@@ -440,6 +440,297 @@ public class CreatedBlocks {
             return true;
         }
 
+        // TORCHES
+        else if (state.is(Blocks.TORCH)
+                || state.is(Blocks.WALL_TORCH)
+                || state.is(Blocks.SOUL_TORCH)
+                || state.is(Blocks.SOUL_WALL_TORCH)) {
+
+            change(level, pos, state, Blocks.GLOWSTONE);
+            return true;
+        }
+
+        else if (state.is(Blocks.GLOWSTONE)) {
+
+            change(level, pos, state, Blocks.TORCH);
+            return true;
+        }
+
+        // LANTERNS
+        else if (state.is(Blocks.LANTERN)
+                || state.is(Blocks.SOUL_LANTERN)) {
+
+            change(level, pos, state, Blocks.SHROOMLIGHT);
+            return true;
+        }
+
+        else if (state.is(Blocks.SHROOMLIGHT)) {
+
+            change(level, pos, state, Blocks.LANTERN);
+            return true;
+        }
+
+        // CANDLES
+        else if (state.is(Blocks.CANDLE)
+                || state.is(Blocks.WHITE_CANDLE)
+                || state.is(Blocks.ORANGE_CANDLE)
+                || state.is(Blocks.MAGENTA_CANDLE)
+                || state.is(Blocks.LIGHT_BLUE_CANDLE)
+                || state.is(Blocks.YELLOW_CANDLE)
+                || state.is(Blocks.LIME_CANDLE)
+                || state.is(Blocks.PINK_CANDLE)
+                || state.is(Blocks.GRAY_CANDLE)
+                || state.is(Blocks.LIGHT_GRAY_CANDLE)
+                || state.is(Blocks.CYAN_CANDLE)
+                || state.is(Blocks.PURPLE_CANDLE)
+                || state.is(Blocks.BLUE_CANDLE)
+                || state.is(Blocks.BROWN_CANDLE)
+                || state.is(Blocks.GREEN_CANDLE)
+                || state.is(Blocks.RED_CANDLE)
+                || state.is(Blocks.BLACK_CANDLE)
+                || state.is(Blocks.CAKE)
+                || state.is(Blocks.CANDLE_CAKE)
+                || state.is(Blocks.WHITE_CANDLE_CAKE)
+                || state.is(Blocks.ORANGE_CANDLE_CAKE)
+                || state.is(Blocks.MAGENTA_CANDLE_CAKE)
+                || state.is(Blocks.LIGHT_BLUE_CANDLE_CAKE)
+                || state.is(Blocks.YELLOW_CANDLE_CAKE)
+                || state.is(Blocks.LIME_CANDLE_CAKE)
+                || state.is(Blocks.PINK_CANDLE_CAKE)
+                || state.is(Blocks.GRAY_CANDLE_CAKE)
+                || state.is(Blocks.LIGHT_GRAY_CANDLE_CAKE)
+                || state.is(Blocks.CYAN_CANDLE_CAKE)
+                || state.is(Blocks.PURPLE_CANDLE_CAKE)
+                || state.is(Blocks.BLUE_CANDLE_CAKE)
+                || state.is(Blocks.BROWN_CANDLE_CAKE)
+                || state.is(Blocks.GREEN_CANDLE_CAKE)
+                || state.is(Blocks.RED_CANDLE_CAKE)
+                || state.is(Blocks.BLACK_CANDLE_CAKE)) {
+
+            change(level, pos, state, Blocks.END_ROD);
+            return true;
+        }
+
+        else if (state.is(Blocks.END_ROD)) {
+
+            change(level, pos, state, Blocks.CANDLE);
+            return true;
+        }
+
+        // FLOWER POTS
+        else if (state.is(Blocks.FLOWER_POT)
+                || state.is(Blocks.POTTED_OAK_SAPLING)
+                || state.is(Blocks.POTTED_SPRUCE_SAPLING)
+                || state.is(Blocks.POTTED_BIRCH_SAPLING)
+                || state.is(Blocks.POTTED_JUNGLE_SAPLING)
+                || state.is(Blocks.POTTED_ACACIA_SAPLING)
+                || state.is(Blocks.POTTED_DARK_OAK_SAPLING)
+                || state.is(Blocks.POTTED_MANGROVE_PROPAGULE)
+                || state.is(Blocks.POTTED_CHERRY_SAPLING)
+                || state.is(Blocks.POTTED_BAMBOO)
+                || state.is(Blocks.POTTED_AZALEA)
+                || state.is(Blocks.POTTED_FLOWERING_AZALEA)
+                || state.is(Blocks.POTTED_DANDELION)
+                || state.is(Blocks.POTTED_POPPY)
+                || state.is(Blocks.POTTED_BLUE_ORCHID)
+                || state.is(Blocks.POTTED_ALLIUM)
+                || state.is(Blocks.POTTED_AZURE_BLUET)
+                || state.is(Blocks.POTTED_RED_TULIP)
+                || state.is(Blocks.POTTED_ORANGE_TULIP)
+                || state.is(Blocks.POTTED_WHITE_TULIP)
+                || state.is(Blocks.POTTED_PINK_TULIP)
+                || state.is(Blocks.POTTED_OXEYE_DAISY)
+                || state.is(Blocks.POTTED_CORNFLOWER)
+                || state.is(Blocks.POTTED_LILY_OF_THE_VALLEY)
+                || state.is(Blocks.POTTED_WITHER_ROSE)
+                || state.is(Blocks.POTTED_RED_MUSHROOM)
+                || state.is(Blocks.POTTED_BROWN_MUSHROOM)
+                || state.is(Blocks.POTTED_DEAD_BUSH)
+                || state.is(Blocks.POTTED_CACTUS)
+                || state.is(Blocks.POTTED_CRIMSON_FUNGUS)
+                || state.is(Blocks.POTTED_WARPED_FUNGUS)
+                || state.is(Blocks.POTTED_CRIMSON_ROOTS)
+                || state.is(Blocks.POTTED_WARPED_ROOTS)
+                || state.is(Blocks.POTTED_TORCHFLOWER)) {
+
+            change(level, pos, state, Blocks.DECORATED_POT);
+            return true;
+        }
+
+        else if (state.is(Blocks.DECORATED_POT)) {
+
+            change(level, pos, state, Blocks.FLOWER_POT);
+            return true;
+        }
+
+        // SAPLINGS
+        else if (state.is(Blocks.OAK_SAPLING)
+                || state.is(Blocks.SPRUCE_SAPLING)
+                || state.is(Blocks.BIRCH_SAPLING)
+                || state.is(Blocks.JUNGLE_SAPLING)
+                || state.is(Blocks.ACACIA_SAPLING)
+                || state.is(Blocks.DARK_OAK_SAPLING)
+                || state.is(Blocks.MANGROVE_PROPAGULE)
+                || state.is(Blocks.CHERRY_SAPLING)
+                || state.is(Blocks.AZALEA)
+                || state.is(Blocks.FLOWERING_AZALEA)) {
+
+            change(level, pos, state, Blocks.HONEY_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.HONEY_BLOCK)) {
+
+            change(level, pos, state, Blocks.OAK_SAPLING);
+            return true;
+        }
+
+        // FLOWERS
+        else if (state.is(Blocks.DANDELION)
+                || state.is(Blocks.POPPY)
+                || state.is(Blocks.BLUE_ORCHID)
+                || state.is(Blocks.ALLIUM)
+                || state.is(Blocks.AZURE_BLUET)
+                || state.is(Blocks.RED_TULIP)
+                || state.is(Blocks.ORANGE_TULIP)
+                || state.is(Blocks.WHITE_TULIP)
+                || state.is(Blocks.PINK_TULIP)
+                || state.is(Blocks.OXEYE_DAISY)
+                || state.is(Blocks.CORNFLOWER)
+                || state.is(Blocks.LILY_OF_THE_VALLEY)
+                || state.is(Blocks.WITHER_ROSE)
+                || state.is(Blocks.SUNFLOWER)
+                || state.is(Blocks.LILAC)
+                || state.is(Blocks.ROSE_BUSH)
+                || state.is(Blocks.PEONY)
+                || state.is(Blocks.TORCHFLOWER)
+                || state.is(Blocks.PITCHER_PLANT)) {
+
+            change(level, pos, state, Blocks.SPORE_BLOSSOM);
+            return true;
+        }
+
+        else if (state.is(Blocks.SPORE_BLOSSOM)) {
+
+            change(level, pos, state, Blocks.POPPY);
+            return true;
+        }
+
+        // SMALL PLANTS
+        else if (state.is(Blocks.GRASS)
+                || state.is(Blocks.FERN)
+                || state.is(Blocks.TALL_GRASS)
+                || state.is(Blocks.LARGE_FERN)
+                || state.is(Blocks.DEAD_BUSH)
+                || state.is(Blocks.SEAGRASS)
+                || state.is(Blocks.SEA_PICKLE)
+                || state.is(Blocks.LILY_PAD)
+                || state.is(Blocks.VINE)
+                || state.is(Blocks.GLOW_LICHEN)
+                || state.is(Blocks.HANGING_ROOTS)
+                || state.is(Blocks.BAMBOO_SAPLING)
+                || state.is(Blocks.BAMBOO)
+                || state.is(Blocks.BROWN_MUSHROOM)
+                || state.is(Blocks.RED_MUSHROOM)
+                || state.is(Blocks.BROWN_MUSHROOM_BLOCK)
+                || state.is(Blocks.RED_MUSHROOM_BLOCK)
+                || state.is(Blocks.CACTUS)
+                || state.is(Blocks.SUGAR_CANE)
+                || state.is(Blocks.PUMPKIN)
+                || state.is(Blocks.MELON)
+                || state.is(Blocks.CRIMSON_FUNGUS)
+                || state.is(Blocks.WARPED_FUNGUS)
+                || state.is(Blocks.CRIMSON_ROOTS)
+                || state.is(Blocks.WARPED_ROOTS)
+                || state.is(Blocks.NETHER_SPROUTS)
+                || state.is(Blocks.WEEPING_VINES)
+                || state.is(Blocks.WEEPING_VINES_PLANT)
+                || state.is(Blocks.TWISTING_VINES)
+                || state.is(Blocks.TWISTING_VINES_PLANT)) {
+
+            change(level, pos, state, Blocks.HAY_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.HAY_BLOCK)) {
+
+            change(level, pos, state, Blocks.GRASS);
+            return true;
+        }
+
+        // CROPS
+        else if (state.is(Blocks.WHEAT)
+                || state.is(Blocks.CARROTS)
+                || state.is(Blocks.POTATOES)
+                || state.is(Blocks.BEETROOTS)
+                || state.is(Blocks.MELON_STEM)
+                || state.is(Blocks.PUMPKIN_STEM)
+                || state.is(Blocks.ATTACHED_MELON_STEM)
+                || state.is(Blocks.ATTACHED_PUMPKIN_STEM)
+                || state.is(Blocks.SWEET_BERRY_BUSH)
+                || state.is(Blocks.COCOA)
+                || state.is(Blocks.TORCHFLOWER_CROP)
+                || state.is(Blocks.PITCHER_CROP)
+                || state.is(Blocks.NETHER_WART)) {
+
+            change(level, pos, state, Blocks.BONE_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.BONE_BLOCK)) {
+
+            change(level, pos, state, Blocks.WHEAT);
+            return true;
+        }
+
+        // RAILS
+        else if (state.is(Blocks.RAIL)
+                || state.is(Blocks.POWERED_RAIL)
+                || state.is(Blocks.DETECTOR_RAIL)
+                || state.is(Blocks.ACTIVATOR_RAIL)) {
+
+            change(level, pos, state, Blocks.REDSTONE_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.REDSTONE_BLOCK)) {
+
+            change(level, pos, state, Blocks.RAIL);
+            return true;
+        }
+
+        // REDSTONE SMALL BLOCKS
+        else if (state.is(Blocks.REDSTONE_TORCH)
+                || state.is(Blocks.REDSTONE_WALL_TORCH)
+                || state.is(Blocks.REPEATER)
+                || state.is(Blocks.COMPARATOR)
+                || state.is(Blocks.LEVER)
+                || state.is(Blocks.DAYLIGHT_DETECTOR)) {
+
+            change(level, pos, state, Blocks.REDSTONE_LAMP);
+            return true;
+        }
+
+        else if (state.is(Blocks.REDSTONE_LAMP)) {
+
+            change(level, pos, state, Blocks.REDSTONE_TORCH);
+            return true;
+        }
+
+        // CLIMBING AND SUPPORT BLOCKS
+        else if (state.is(Blocks.LADDER)
+                || state.is(Blocks.SCAFFOLDING)) {
+
+            change(level, pos, state, Blocks.BAMBOO_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.BAMBOO_BLOCK)) {
+
+            change(level, pos, state, Blocks.LADDER);
+            return true;
+        }
+
         // WORK BLOCKS
         else if (state.is(Blocks.CRAFTING_TABLE)) {
 
@@ -534,6 +825,54 @@ public class CreatedBlocks {
         else if (state.is(Blocks.CUT_COPPER)) {
 
             change(level, pos, state, Blocks.STONECUTTER);
+            return true;
+        }
+
+        else if (state.is(Blocks.BREWING_STAND)) {
+
+            change(level, pos, state, Blocks.CAULDRON);
+            return true;
+        }
+
+        else if (state.is(Blocks.CAULDRON)) {
+
+            change(level, pos, state, Blocks.BREWING_STAND);
+            return true;
+        }
+
+        else if (state.is(Blocks.COMPOSTER)) {
+
+            change(level, pos, state, Blocks.BEEHIVE);
+            return true;
+        }
+
+        else if (state.is(Blocks.BEEHIVE)) {
+
+            change(level, pos, state, Blocks.COMPOSTER);
+            return true;
+        }
+
+        else if (state.is(Blocks.BELL)) {
+
+            change(level, pos, state, Blocks.AMETHYST_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.AMETHYST_BLOCK)) {
+
+            change(level, pos, state, Blocks.BELL);
+            return true;
+        }
+
+        else if (state.is(Blocks.RESPAWN_ANCHOR)) {
+
+            change(level, pos, state, Blocks.NETHERITE_BLOCK);
+            return true;
+        }
+
+        else if (state.is(Blocks.NETHERITE_BLOCK)) {
+
+            change(level, pos, state, Blocks.RESPAWN_ANCHOR);
             return true;
         }
 

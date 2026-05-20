@@ -1,13 +1,52 @@
 package com.example.examplemod.client;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class PremiumDetailsScreen extends Screen {
 
+    private static final int NEON =
+            0xFFFFFFFF;
+
+    private static final int WHITE =
+            0xFFE0E0E0;
+
+    private static final int PANEL =
+            0x88000000;
+
+    private static final int STONE =
+            0x00000000;
+
+    private static final int STONE_LIGHT =
+            0xFFC0C0C0;
+
+    private static final int STONE_DARK =
+            0xFF202020;
+
+    private static final int VANILLA_BUTTON =
+            0xFF565656;
+
+    private static final int VANILLA_BUTTON_LIGHT =
+            0xFFAAAAAA;
+
+    private static final int VANILLA_BUTTON_DARK =
+            0xFF222222;
+
     private final PremiumEntry entry;
+    private LivingEntity previewEntity;
+    private String previewEntityId =
+            "";
 
     public PremiumDetailsScreen(PremiumEntry entry) {
         super(Component.literal(entry.getDisplayName()));
@@ -27,154 +66,192 @@ public class PremiumDetailsScreen extends Screen {
             float partialTick
     ) {
 
-        renderBackground(guiGraphics);
+        int panelWidth =
+                Math.min(350, width - 24);
 
-        int panelWidth = 176;
-        int panelHeight = 136;
+        int panelHeight =
+                Math.min(245, height - 24);
 
-        int x = (width - panelWidth) / 2;
-        int y = (height - panelHeight) / 2;
+        int x =
+                (width - panelWidth) / 2;
 
-        guiGraphics.fill(
+        int y =
+                (height - panelHeight) / 2;
+
+        drawMinecraftPanel(
+                guiGraphics,
                 x,
                 y,
-                x + panelWidth,
-                y + panelHeight,
-                0xA0000000
+                panelWidth,
+                panelHeight
         );
 
-        drawBorder(guiGraphics, x, y, panelWidth, panelHeight);
-
-        drawCornerTopLeft(guiGraphics, x + 6, y + 6);
-        drawCornerTopRight(guiGraphics, x + panelWidth - 6, y + 6);
-        drawCornerBottomLeft(guiGraphics, x + 6, y + panelHeight - 6);
-        drawCornerBottomRight(guiGraphics, x + panelWidth - 6, y + panelHeight - 6);
-
-        // TITULO (mantido)
         guiGraphics.drawCenteredString(
                 font,
                 entry.getDisplayName(),
                 width / 2,
-                y + 9,
-                0xFF73FF45
+                y + 10,
+                NEON
         );
 
-        // MOB
-        int mobX = x + 16;
-        int mobY = y + 30;
-        int mobSize = 40;
+        int iconX =
+                x + 18;
 
-        guiGraphics.fill(
-                mobX,
-                mobY,
-                mobX + mobSize,
-                mobY + mobSize,
-                0x55000000
-        );
+        int iconY =
+                y + 38;
 
-        drawGreenBox(
+        int iconSize =
+                92;
+
+        drawInsetBox(
                 guiGraphics,
-                mobX,
-                mobY,
-                mobSize,
-                mobSize
+                iconX,
+                iconY,
+                iconSize,
+                iconSize
         );
 
-        drawMobFace(
+        drawIcon(
                 guiGraphics,
-                mobX + 6,
-                mobY + 6
+                iconX,
+                iconY,
+                iconSize,
+                mouseX,
+                mouseY
         );
 
-        // ===== TEXTO MENOR =====
-        guiGraphics.pose().pushPose();
+        int textX =
+                x + 126;
 
-        // 65% do tamanho original
-        guiGraphics.pose().scale(0.65F, 0.65F, 1F);
+        int textY =
+                y + 38;
 
-        float tx = (x + 66) / 0.65F;
-
-        // Categoria
         guiGraphics.drawString(
                 font,
                 "Categoria:",
-                (int) tx,
-                (int) ((y + 36) / 0.65F),
-                0xFF73FF45
+                textX + 1,
+                textY + 1,
+                0xFF000000
+        );
+
+        guiGraphics.drawString(
+                font,
+                "Categoria:",
+                textX,
+                textY,
+                NEON
         );
 
         guiGraphics.drawString(
                 font,
                 entry.getCategory(),
-                (int) tx,
-                (int) ((y + 44) / 0.65F),
-                0xFFFFFFFF
+                textX,
+                textY + 12,
+                WHITE
         );
 
-        // Transformacao
         guiGraphics.drawString(
                 font,
                 "Transformacao:",
-                (int) tx,
-                (int) ((y + 62) / 0.65F),
-                0xFF73FF45
+                textX + 1,
+                textY + 35,
+                0xFF000000
         );
 
         guiGraphics.drawString(
                 font,
-                getTransformation(),
-                (int) tx,
-                (int) ((y + 70) / 0.65F),
-                0xFFFFFFFF
+                "Transformacao:",
+                textX,
+                textY + 34,
+                NEON
         );
 
-        // Atributos
+        drawWrapped(
+                guiGraphics,
+                entry.getTransformation(),
+                textX,
+                textY + 46,
+                panelWidth - 144,
+                WHITE
+        );
+
         guiGraphics.drawString(
                 font,
                 "Atributos:",
-                (int) tx,
-                (int) ((y + 86) / 0.65F),
-                0xFF73FF45
+                x + 19,
+                y + 139,
+                0xFF000000
         );
 
         guiGraphics.drawString(
                 font,
-                getAttributes(),
-                (int) tx,
-                (int) ((y + 94) / 0.65F),
-                0xFFFFFFFF
+                "Atributos:",
+                x + 18,
+                y + 138,
+                NEON
         );
 
-        guiGraphics.pose().popPose();
-
-        // BOTAO
-        int bx = width / 2 - 32;
-        int by = y + 111;
-        int bw = 64;
-        int bh = 16;
-
-        guiGraphics.fill(
-                bx,
-                by,
-                bx + bw,
-                by + bh,
-                0xAA111111
+        drawWrapped(
+                guiGraphics,
+                entry.getAttributes(),
+                x + 18,
+                y + 150,
+                panelWidth - 36,
+                WHITE
         );
 
-        drawGreenBox(
+        int normalX =
+                x + 18;
+
+        int normalWidth =
+                96;
+
+        int modifiedWidth =
+                122;
+
+        int modifiedX =
+                x + panelWidth - 18 - modifiedWidth;
+
+        int commandY =
+                y + panelHeight - 52;
+
+        drawButton(
+                guiGraphics,
+                normalX,
+                commandY,
+                normalWidth,
+                18,
+                "Spawnar normal",
+                mouseX,
+                mouseY
+        );
+
+        drawButton(
+                guiGraphics,
+                modifiedX,
+                commandY,
+                modifiedWidth,
+                18,
+                "Spawnar modificado",
+                mouseX,
+                mouseY
+        );
+
+        int bx =
+                width / 2 - 42;
+
+        int by =
+                y + panelHeight - 28;
+
+        drawButton(
                 guiGraphics,
                 bx,
                 by,
-                bw,
-                bh
-        );
-
-        guiGraphics.drawCenteredString(
-                font,
+                84,
+                18,
                 "Voltar",
-                width / 2,
-                by + 4,
-                0xFF73FF45
+                mouseX,
+                mouseY
         );
     }
 
@@ -185,19 +262,58 @@ public class PremiumDetailsScreen extends Screen {
             int button
     ) {
 
-        int panelHeight = 136;
-        int y = (height - panelHeight) / 2;
+        int panelWidth =
+                Math.min(350, width - 24);
 
-        int bx = width / 2 - 32;
-        int by = y + 111;
+        int panelHeight =
+                Math.min(245, height - 24);
+
+        int x =
+                (width - panelWidth) / 2;
+
+        int y =
+                (height - panelHeight) / 2;
+
+        int normalX =
+                x + 18;
+
+        int normalWidth =
+                96;
+
+        int modifiedWidth =
+                122;
+
+        int modifiedX =
+                x + panelWidth - 18 - modifiedWidth;
+
+        int commandY =
+                y + panelHeight - 52;
+
+        if (isInside(mouseX, mouseY, normalX, commandY, normalWidth, 18)) {
+            runCommand(entry.getNormalCommand());
+            return true;
+        }
+
+        if (isInside(mouseX, mouseY, modifiedX, commandY, modifiedWidth, 18)) {
+            runCommand(entry.getModifiedCommand());
+            return true;
+        }
+
+        int bx =
+                width / 2 - 42;
+
+        int by =
+                y + panelHeight - 28;
 
         if (mouseX >= bx
-                && mouseX <= bx + 64
+                && mouseX <= bx + 84
                 && mouseY >= by
-                && mouseY <= by + 16) {
+                && mouseY <= by + 18) {
 
             minecraft.setScreen(
-                    new PremiumMenuScreen()
+                    new PremiumMenuScreen(
+                            entry.getTab()
+                    )
             );
 
             return true;
@@ -206,52 +322,317 @@ public class PremiumDetailsScreen extends Screen {
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private void drawGreenBox(
+    private void drawButton(
             GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height,
+            String text,
+            int mouseX,
+            int mouseY
+    ) {
+
+        boolean hovered =
+                isInside(mouseX, mouseY, x, y, width, height);
+
+        guiGraphics.fill(x + 2, y + 2, x + width + 2, y + height + 2, 0x77000000);
+        guiGraphics.fill(x, y, x + width, y + height, hovered ? 0xFF707070 : VANILLA_BUTTON);
+        guiGraphics.fill(x, y, x + width, y + 1, VANILLA_BUTTON_LIGHT);
+        guiGraphics.fill(x, y, x + 1, y + height, VANILLA_BUTTON_LIGHT);
+        guiGraphics.fill(x, y + height - 1, x + width, y + height, VANILLA_BUTTON_DARK);
+        guiGraphics.fill(x + width - 1, y, x + width, y + height, VANILLA_BUTTON_DARK);
+
+        if (hovered) {
+            drawThinGreenBox(
+                    guiGraphics,
+                    x + 2,
+                    y + 2,
+                    width - 4,
+                    height - 4
+            );
+        }
+
+        guiGraphics.drawCenteredString(
+                font,
+                text,
+                x + width / 2 + 1,
+                y + 6,
+                0xFF000000
+        );
+
+        guiGraphics.drawCenteredString(
+                font,
+                text,
+                x + width / 2,
+                y + 5,
+                NEON
+        );
+    }
+
+    private boolean isInside(
+            double mouseX,
+            double mouseY,
             int x,
             int y,
             int width,
             int height
     ) {
 
-        guiGraphics.fill(x, y, x + width, y + 2, 0xFF73FF45);
-        guiGraphics.fill(x, y, x + 2, y + height, 0xFF73FF45);
-        guiGraphics.fill(x + width - 2, y, x + width, y + height, 0xFF73FF45);
-        guiGraphics.fill(x, y + height - 2, x + width, y + height, 0xFF73FF45);
+        return mouseX >= x
+                && mouseX <= x + width
+                && mouseY >= y
+                && mouseY <= y + height;
     }
 
-    private void drawBorder(
+    private void runCommand(
+            String command
+    ) {
+
+        if (command == null
+                || command.trim().isEmpty()
+                || minecraft == null
+                || minecraft.player == null
+                || minecraft.getConnection() == null) {
+            return;
+        }
+
+        minecraft.getConnection().sendCommand(
+                command
+        );
+    }
+
+    private void drawIcon(
             GuiGraphics guiGraphics,
             int x,
             int y,
-            int width,
-            int height
+            int size,
+            int mouseX,
+            int mouseY
     ) {
 
-        guiGraphics.fill(x, y, x + width, y + 1, 0xFF5A5A5A);
-        guiGraphics.fill(x, y, x + 1, y + height, 0xFF5A5A5A);
-        guiGraphics.fill(x + width - 1, y, x + width, y + height, 0xFF5A5A5A);
-        guiGraphics.fill(x, y + height - 1, x + width, y + height, 0xFF5A5A5A);
+        String entityId =
+                entityIdFromCommand(
+                        entry.getNormalCommand()
+                );
+
+        if (!entityId.isEmpty()) {
+            LivingEntity livingEntity =
+                    getPreviewEntity(entityId);
+
+            if (livingEntity != null) {
+                guiGraphics.enableScissor(
+                        x + 3,
+                        y + 3,
+                        x + size - 3,
+                        y + size - 3
+                );
+
+                InventoryScreen.renderEntityInInventoryFollowsMouse(
+                        guiGraphics,
+                        x + size / 2 + entityXOffset(entityId),
+                        y + entityBottom(entityId, size),
+                        entityScale(entityId, 46),
+                        (float) (x + size / 2 - mouseX),
+                        (float) (y + size / 2 - mouseY),
+                        livingEntity
+                );
+
+                guiGraphics.disableScissor();
+                return;
+            }
+        }
+
+        if (entry.usesMobTexture()) {
+            drawMobFace(
+                    guiGraphics,
+                    x + 32,
+                    y + 32
+            );
+            return;
+        }
+
+        guiGraphics.enableScissor(
+                x + 3,
+                y + 3,
+                x + size - 3,
+                y + size - 3
+        );
+
+        renderItemPreview(
+                guiGraphics,
+                new ItemStack(
+                        entry.getIconItem()
+                ),
+                x + size / 2,
+                y + size / 2,
+                3.25F,
+                mouseX,
+                mouseY
+        );
+
+        guiGraphics.disableScissor();
     }
 
-    private void drawCornerTopLeft(GuiGraphics g, int x, int y) {
-        g.fill(x, y, x + 6, y + 1, 0xFF73FF45);
-        g.fill(x, y, x + 1, y + 6, 0xFF73FF45);
+    private LivingEntity getPreviewEntity(
+            String entityId
+    ) {
+
+        if (!entityId.equals(previewEntityId)) {
+            previewEntityId = entityId;
+            previewEntity =
+                    createPreviewEntity(entityId);
+        }
+
+        return previewEntity;
     }
 
-    private void drawCornerTopRight(GuiGraphics g, int x, int y) {
-        g.fill(x - 5, y, x + 1, y + 1, 0xFF73FF45);
-        g.fill(x, y, x + 1, y + 6, 0xFF73FF45);
+    private LivingEntity createPreviewEntity(
+            String entityId
+    ) {
+
+        if (minecraft == null
+                || minecraft.level == null
+                || entityId.isEmpty()) {
+            return null;
+        }
+
+        EntityType<?> entityType =
+                EntityType.byString(entityId)
+                        .orElse(null);
+
+        if (entityType == null) {
+            return null;
+        }
+
+        Entity entity =
+                entityType.create(minecraft.level);
+
+        if (entity instanceof LivingEntity livingEntity) {
+            return livingEntity;
+        }
+
+        return null;
     }
 
-    private void drawCornerBottomLeft(GuiGraphics g, int x, int y) {
-        g.fill(x, y, x + 6, y + 1, 0xFF73FF45);
-        g.fill(x, y - 5, x + 1, y + 1, 0xFF73FF45);
+    private String entityIdFromCommand(
+            String command
+    ) {
+
+        if (command == null
+                || !command.startsWith("summon ")) {
+            return "";
+        }
+
+        int start =
+                "summon ".length();
+
+        int end =
+                command.indexOf(" ", start);
+
+        if (end <= start) {
+            return "";
+        }
+
+        return command.substring(
+                start,
+                end
+        );
     }
 
-    private void drawCornerBottomRight(GuiGraphics g, int x, int y) {
-        g.fill(x - 5, y, x + 1, y + 1, 0xFF73FF45);
-        g.fill(x, y - 5, x + 1, y + 1, 0xFF73FF45);
+    private int entityScale(
+            String entityId,
+            int baseScale
+    ) {
+
+        if (entityId.contains("ender_dragon")) return Math.max(8, baseScale / 3);
+        if (entityId.contains("giant")) return Math.max(8, baseScale / 3);
+        if (entityId.contains("ghast")) return Math.max(11, baseScale / 2);
+        if (entityId.contains("wither")) return Math.max(11, baseScale / 2);
+        if (entityId.contains("ravager")) return Math.max(12, baseScale / 2);
+        if (entityId.contains("warden")) return Math.max(12, baseScale / 2);
+        if (entityId.contains("elder_guardian")) return Math.max(12, baseScale / 2);
+        if (entityId.contains("iron_golem")) return Math.max(14, baseScale - 10);
+        if (entityId.contains("camel")) return Math.max(14, baseScale - 10);
+        if (entityId.contains("horse")) return Math.max(14, baseScale - 8);
+        if (entityId.contains("hoglin")) return Math.max(14, baseScale - 8);
+
+        return baseScale;
+    }
+
+    private int entityBottom(
+            String entityId,
+            int size
+    ) {
+
+        if (entityId.contains("bee")) return size - 12;
+        if (entityId.contains("bat")) return size - 12;
+        if (entityId.contains("vex")) return size - 12;
+        if (entityId.contains("allay")) return size - 12;
+        if (entityId.contains("ghast")) return size - 10;
+        if (entityId.contains("squid")) return size - 10;
+        if (entityId.contains("ender_dragon")) return size - 10;
+        if (entityId.contains("giant")) return size - 7;
+
+        return size - 7;
+    }
+
+    private int entityXOffset(
+            String entityId
+    ) {
+
+        if (entityId.contains("ender_dragon")) return -1;
+        if (entityId.contains("squid")) return -1;
+
+        return 0;
+    }
+
+    private void renderItemPreview(
+            GuiGraphics guiGraphics,
+            ItemStack itemStack,
+            int x,
+            int y,
+            float scale,
+            int mouseX,
+            int mouseY
+    ) {
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(x, y, 120);
+        guiGraphics.pose().scale(scale, scale, 1.0F);
+        guiGraphics.renderItem(itemStack, -8, -8);
+        guiGraphics.pose().popPose();
+    }
+
+    private void drawWrapped(
+            GuiGraphics guiGraphics,
+            String text,
+            int x,
+            int y,
+            int width,
+            int color
+    ) {
+
+        List<FormattedCharSequence> lines =
+                font.split(
+                        Component.literal(text),
+                        width
+                );
+
+        int lineY =
+                y;
+
+        for (FormattedCharSequence line : lines) {
+            guiGraphics.drawString(
+                    font,
+                    line,
+                    x,
+                    lineY,
+                    color
+            );
+
+            lineY += 10;
+        }
     }
 
     private void drawMobFace(
@@ -272,6 +653,8 @@ public class PremiumDetailsScreen extends Screen {
                                 + ".png"
                 );
 
+        RenderSystem.enableBlend();
+
         guiGraphics.blit(
                 texture,
                 x,
@@ -285,12 +668,118 @@ public class PremiumDetailsScreen extends Screen {
         );
     }
 
-    private String getTransformation() {
-        return "Encantamentos";
+    private void drawGreenBox(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height
+    ) {
+
+        guiGraphics.fill(x, y, x + width, y + 2, 0xFFC0C0C0);
+        guiGraphics.fill(x, y, x + 2, y + height, 0xFFC0C0C0);
+        guiGraphics.fill(x + width - 2, y, x + width, y + height, 0xFF202020);
+        guiGraphics.fill(x, y + height - 2, x + width, y + height, 0xFF202020);
     }
 
-    private String getAttributes() {
-        return "+ Bonus encantamento";
+    private void drawThinGreenBox(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height
+    ) {
+
+        guiGraphics.fill(x, y, x + width, y + 1, 0xFFC0C0C0);
+        guiGraphics.fill(x, y, x + 1, y + height, 0xFFC0C0C0);
+        guiGraphics.fill(x + width - 1, y, x + width, y + height, 0xFF202020);
+        guiGraphics.fill(x, y + height - 1, x + width, y + height, 0xFF202020);
+    }
+
+    private void drawMinecraftPanel(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height
+    ) {
+
+        guiGraphics.fill(x + 6, y + 7, x + width + 6, y + height + 7, 0x77000000);
+        guiGraphics.fill(x + 2, y + 2, x + width - 2, y + height - 2, PANEL);
+
+        guiGraphics.fill(x, y, x + width, y + 2, STONE_LIGHT);
+        guiGraphics.fill(x, y, x + 2, y + height, STONE_LIGHT);
+        guiGraphics.fill(x, y + height - 2, x + width, y + height, STONE_DARK);
+        guiGraphics.fill(x + width - 2, y, x + width, y + height, STONE_DARK);
+
+        drawBorder(guiGraphics, x + 4, y + 4, width - 8, height - 8);
+    }
+
+    private void drawRaisedBox(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height,
+            int fill
+    ) {
+
+        guiGraphics.fill(x + 2, y + 2, x + width + 2, y + height + 2, 0x77000000);
+        guiGraphics.fill(x, y, x + width, y + height, fill);
+        guiGraphics.fill(x, y, x + width, y + 1, STONE_LIGHT);
+        guiGraphics.fill(x, y, x + 1, y + height, STONE_LIGHT);
+        guiGraphics.fill(x, y + height - 1, x + width, y + height, STONE_DARK);
+        guiGraphics.fill(x + width - 1, y, x + width, y + height, STONE_DARK);
+    }
+
+    private void drawInsetBox(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height
+    ) {
+
+        guiGraphics.fill(x, y, x + width, y + height, 0xCC050505);
+        guiGraphics.fill(x, y, x + width, y + 1, STONE_DARK);
+        guiGraphics.fill(x, y, x + 1, y + height, STONE_DARK);
+        guiGraphics.fill(x, y + height - 1, x + width, y + height, STONE_LIGHT);
+        guiGraphics.fill(x + width - 1, y, x + width, y + height, STONE_LIGHT);
+        drawBorder(guiGraphics, x + 2, y + 2, width - 4, height - 4);
+    }
+
+    private void drawBorder(
+            GuiGraphics guiGraphics,
+            int x,
+            int y,
+            int width,
+            int height
+    ) {
+
+        guiGraphics.fill(x, y, x + width, y + 1, 0xFF5A5A5A);
+        guiGraphics.fill(x, y, x + 1, y + height, 0xFF5A5A5A);
+        guiGraphics.fill(x + width - 1, y, x + width, y + height, 0xFF5A5A5A);
+        guiGraphics.fill(x, y + height - 1, x + width, y + height, 0xFF5A5A5A);
+    }
+
+    private void drawCornerTopLeft(GuiGraphics g, int x, int y) {
+        g.fill(x, y, x + 6, y + 1, WHITE);
+        g.fill(x, y, x + 1, y + 6, WHITE);
+    }
+
+    private void drawCornerTopRight(GuiGraphics g, int x, int y) {
+        g.fill(x - 5, y, x + 1, y + 1, WHITE);
+        g.fill(x, y, x + 1, y + 6, WHITE);
+    }
+
+    private void drawCornerBottomLeft(GuiGraphics g, int x, int y) {
+        g.fill(x, y, x + 6, y + 1, WHITE);
+        g.fill(x, y - 5, x + 1, y + 1, WHITE);
+    }
+
+    private void drawCornerBottomRight(GuiGraphics g, int x, int y) {
+        g.fill(x - 5, y, x + 1, y + 1, WHITE);
+        g.fill(x, y - 5, x + 1, y + 1, WHITE);
     }
 
     @Override
