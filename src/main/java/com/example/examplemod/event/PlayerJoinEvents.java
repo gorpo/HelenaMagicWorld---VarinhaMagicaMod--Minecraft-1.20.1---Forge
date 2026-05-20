@@ -1,0 +1,20 @@
+package com.example.examplemod.event;
+
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraft.network.chat.Component;
+
+@Mod.EventBusSubscriber
+public class PlayerJoinEvents {
+
+    @SubscribeEvent
+    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+
+        event.getEntity().sendSystemMessage(
+                Component.literal(
+                        "§6✨ Dica: coloque 3 gravetos na vertical para criar a Magic Hemp!"
+                )
+        );
+    }
+}
