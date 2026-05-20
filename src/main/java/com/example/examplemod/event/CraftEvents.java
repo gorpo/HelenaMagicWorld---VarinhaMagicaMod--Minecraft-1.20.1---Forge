@@ -43,6 +43,20 @@ public class CraftEvents {
         var state =
                 level.getBlockState(pos);
 
+        if (CreatedBlocks.transform(
+                level,
+                pos,
+                state
+        )) {
+
+            ExampleMod.effects(
+                    (ServerLevel) level,
+                    pos
+            );
+
+            return;
+        }
+
         if (state.is(Blocks.STONE)
                 || state.is(Blocks.ANDESITE)
                 || state.is(Blocks.DIORITE)
