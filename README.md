@@ -1,6 +1,22 @@
 # 🌿 Magic Hemp
+![Banner](screenshots/banner.png)
 
-Mod premium para **Minecraft Forge 1.20.1**, com varinha mágica, menus interativos, transformação de blocos, spawn de itens, vilas, construções, comandos, sistema premium e muito mais.
+Mod premium para **Minecraft Forge 1.20.1** que transforma completamente sua experiência no Minecraft.
+
+Com a poderosa **Varinha Mágica do Magic Hemp**, o jogador ganha acesso a sistemas especiais capazes de alterar o mundo em tempo real: transformar blocos comuns em recursos raros, controlar criaturas, gerar vilas inteiras, spawnar estruturas gigantescas, acessar menus premium interativos e desbloquear funções avançadas diretamente dentro do jogo.
+
+Explore um sistema mágico onde:
+- blocos podem evoluir em materiais valiosos
+- criaturas hostis podem ser pacificadas
+- estruturas podem surgir instantaneamente
+- vilas aparecem ao seu redor
+- menus premium controlam o mundo inteiro
+- comandos especiais desbloqueiam funções ocultas
+- poderes mágicos transformam sua gameplay
+
+O mod foi criado para entregar uma experiência visual, divertida e poderosa, misturando magia, controle total do mundo, caos, criatividade e exploração em um único sistema premium.
+
+Se você sempre quis sentir que possui um artefato capaz de dobrar o Minecraft às suas próprias regras, o Magic Hemp foi feito para você.
 
 ---
 
