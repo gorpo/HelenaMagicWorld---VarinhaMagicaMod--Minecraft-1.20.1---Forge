@@ -50,7 +50,16 @@ public class CraftEvents {
 
             level.setBlock(
                     pos,
-                    Blocks.DIAMOND_BLOCK.defaultBlockState(),
+                    Blocks.COAL_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.COAL_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.STONE.defaultBlockState(),
                     3
             );
         }
@@ -59,7 +68,16 @@ public class CraftEvents {
 
             level.setBlock(
                     pos,
-                    Blocks.EMERALD_BLOCK.defaultBlockState(),
+                    Blocks.IRON_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.IRON_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.COBBLESTONE.defaultBlockState(),
                     3
             );
         }
@@ -75,11 +93,162 @@ public class CraftEvents {
             );
         }
 
+        else if (state.is(Blocks.SAND)
+                || state.is(Blocks.RED_SAND)
+                || state.is(Blocks.SANDSTONE)
+                || state.is(Blocks.CUT_SANDSTONE)
+                || state.is(Blocks.SMOOTH_SANDSTONE)
+                || state.is(Blocks.RED_SANDSTONE)
+                || state.is(Blocks.CUT_RED_SANDSTONE)
+                || state.is(Blocks.SMOOTH_RED_SANDSTONE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.GLASS.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.GLASS)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.SAND.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.OAK_LEAVES)
+                || state.is(Blocks.SPRUCE_LEAVES)
+                || state.is(Blocks.BIRCH_LEAVES)
+                || state.is(Blocks.JUNGLE_LEAVES)
+                || state.is(Blocks.ACACIA_LEAVES)
+                || state.is(Blocks.DARK_OAK_LEAVES)
+                || state.is(Blocks.MANGROVE_LEAVES)
+                || state.is(Blocks.CHERRY_LEAVES)
+                || state.is(Blocks.AZALEA_LEAVES)
+                || state.is(Blocks.FLOWERING_AZALEA_LEAVES)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.EMERALD_BLOCK.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.EMERALD_BLOCK)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.OAK_LEAVES.defaultBlockState(),
+                    3
+            );
+        }
+
         else if (state.is(BlockTags.LOGS)) {
 
             level.setBlock(
                     pos,
                     Blocks.GOLD_BLOCK.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.GOLD_BLOCK)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.OAK_LOG.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_COAL_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.COPPER_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.IRON_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_COPPER_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_IRON_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_IRON_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.GOLD_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.EMERALD_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_GOLD_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.REDSTONE_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.LAPIS_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_REDSTONE_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.LAPIS_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.EMERALD_ORE.defaultBlockState(),
+                    3
+            );
+        }
+
+        else if (state.is(Blocks.DEEPSLATE_LAPIS_ORE)) {
+
+            level.setBlock(
+                    pos,
+                    Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState(),
                     3
             );
         }
