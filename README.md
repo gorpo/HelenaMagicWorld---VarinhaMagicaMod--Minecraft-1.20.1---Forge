@@ -1,28 +1,75 @@
-# 🌿 Magic Hemp
+﻿# Magic Hemp
 
-Mod premium para **Minecraft Forge 1.20.1**, com varinha mágica, menus interativos, transformação de blocos, spawn de itens, vilas, construções, comandos, sistema premium e muito mais.
+<p align="center">
+  <img src="https://img.shields.io/badge/18%2B-MAIORES%20DE%2018%20ANOS-red?style=for-the-badge" alt="Aviso 18+" />
+</p>
+
+> **AVISO IMPORTANTE: ESTE PROJETO E INDICADO PARA MAIORES DE 18 ANOS.**  
+> **O tema Magic Hemp, sua identidade visual e sua proposta premium foram pensados para publico adulto.**
+
+<p align="center">
+  <img src="screenshots/banner.png" alt="Magic Hemp" width="720" />
+</p>
+
+> **MOD FEITO PARA SER USADO JUNTO COM O MAGICHEMP RESOURCE PACK 1.20.1:**  
+> **Resource pack oficial:** https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1  
+> **O mod entrega a jogabilidade premium: varinha, menus, transformacoes, spawns, vilas, construcoes e comandos. O resource pack entrega a camada visual: texturas, modelos, blocos, itens e atmosfera. Juntos eles formam o pacote premium integrado Magic Hemp, uma experiencia quase completa enquanto o shader oficial ainda esta em desenvolvimento.**
+
+<p align="center">
+  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_Premium526X/pack.png" alt="Premium526X" width="96" />
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_models/pack.png" alt="Models" width="96" />
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20._addon/pack.png" alt="Addon" width="96" />
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_bonus/pack.png" alt="Bonus" width="96" />
+  </a>
+</p>
+
+**Ordem obrigatoria do resource pack no Minecraft, de cima para baixo:**  
+**1. `MagicHemp_1.20.1_Premium526X` -> 2. `MagicHemp_1.20.1_models` -> 3. `MagicHemp_1.20._addon` -> 4. `MagicHemp_1.20.1_bonus`**
+
+Mod premium para **Minecraft Forge 1.20.1**, com varinha magica, menus interativos, transformacao de blocos, spawn de itens, vilas, construcoes, comandos, sistema premium e muito mais.
 
 ---
 
-## 🪄 Varinha Mágica
+## MagicHemp Resource Pack
+
+O **MagicHemp Resource Pack** e a metade visual deste projeto. Ele foi feito para ser usado junto com este mod e completa a identidade Magic Hemp com texturas premium, modelos, vegetacao, blocos, itens e acabamento visual para Minecraft 1.20.1.
+
+<p align="center">
+  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/banner.png" alt="MagicHemp Resource Pack" width="720" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/1.png" alt="Screenshot Resource Pack 1" width="330" />
+    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/2.png" alt="Screenshot Resource Pack 2" width="330" />
+  </a>
+</p>
+
+**Use os dois juntos:** este mod controla os sistemas e a jogabilidade; o resource pack transforma o visual para fechar o Minecraft premium Magic Hemp.
+
+---
+## Varinha Magica
 
 ![Varinha](screenshots/varinha.png)
 
-A varinha mágica é o item principal do Magic Hemp.  
+A varinha magica e o item principal do Magic Hemp.  
 Ela permite acessar os sistemas do mod, transformar blocos e interagir com criaturas de forma especial.
 
 ---
 
-## 🪨 Blocos
+## Blocos
 
 ![Blocos](screenshots/blocos.png)
 
-Menu de blocos naturais e minérios.  
-Aqui ficam os blocos que podem fazer parte do sistema mágico de transformação e interação.
+Menu de blocos naturais e minerios.  
+Aqui ficam os blocos que podem fazer parte do sistema magico de transformacao e interacao.
 
 ---
 
-## 👹 Inimigos
+## Inimigos
 
 ![Inimigos](screenshots/inimigos.png)
 
@@ -31,25 +78,25 @@ Criaturas hostis podem ganhar comportamento especial dentro do sistema premium d
 
 ---
 
-## 🐾 Animais
+## Animais
 
 ![Animais](screenshots/animais.png)
 
 Menu de animais premium.  
-Lista criaturas amigáveis e animais que fazem parte dos sistemas mágicos do Magic Hemp.
+Lista criaturas amigaveis e animais que fazem parte dos sistemas magicos do Magic Hemp.
 
 ---
 
-## 🏗️ Criados
+## Criados
 
 ![Criados](screenshots/criados.png)
 
 Menu de objetos criados pelo jogador.  
-Organiza blocos e itens construídos, como pranchas, cercas, portões e portas.
+Organiza blocos e itens construidos, como pranchas, cercas, portoes e portas.
 
 ---
 
-## 📦 Itens
+## Itens
 
 ![Itens](screenshots/itens.png)
 
@@ -58,52 +105,52 @@ Permite navegar por categorias e acessar diversos itens diretamente pela interfa
 
 ---
 
-## ⚙️ Comandos
+## Comandos
 
 ![Comandos](screenshots/cmds.png)
 
 Menu para ativar sistemas que usam comandos.  
-Serve para liberar funções avançadas e menus especiais dentro do Magic Hemp.
+Serve para liberar funcoes avancadas e menus especiais dentro do Magic Hemp.
 
 ---
 
-## 🚫 Desativar Comandos
+## Desativar Comandos
 
 ![Desativar Comandos](screenshots/cmds_desativar.png)
 
 Tela para desativar menus por comando.  
-Ajuda no controle das funções premium e no gerenciamento dos sistemas ativos.
+Ajuda no controle das funcoes premium e no gerenciamento dos sistemas ativos.
 
 ---
 
-## 🏘️ Vilas
+## Vilas
 
 ![Vilas](screenshots/vilas.png)
 
-Menu de vilas spawnáveis.  
-Permite gerar vilas vanilla como planície, deserto, savana e neve diretamente pelo menu.
+Menu de vilas spawnaveis.  
+Permite gerar vilas vanilla como planicie, deserto, savana e neve diretamente pelo menu.
 
 ---
 
-## 🏛️ Construções
+## Construcoes
 
-![Construções](screenshots/contrucoes.png)
+![Construcoes](screenshots/contrucoes.png)
 
-Menu de construções spawnáveis.  
+Menu de construcoes spawnaveis.  
 Permite gerar estruturas como Ancient City, Bastion, Desert Pyramid e End City.
 
 ---
 
-## 🌌 Sistema
+## Sistema
 
 ![Sistema](screenshots/sistema.png)
 
 Central premium do mod.  
-Reúne sistemas avançados como mob spawner, controle de clima, teleporte para biomas e dimensões.
+Reune sistemas avancados como mob spawner, controle de clima, teleporte para biomas e dimensoes.
 
 ---
 
-## ⚒️ Tecnologias
+## Tecnologias
 
 - Java
 - Minecraft Forge 1.20.1
@@ -112,6 +159,7 @@ Reúne sistemas avançados como mob spawner, controle de clima, teleporte para b
 
 ---
 
-## 💚 Magic Hemp
+## Magic Hemp
 
-Um mod mágico, premium e poderoso para transformar a experiência do Minecraft.
+Um mod magico, premium e poderoso para transformar a experiencia do Minecraft.
+
