@@ -5,9 +5,6 @@
   <img src="screenshots/bannerModvarinhaMagica.png" alt="Helena Magic World Varinha Magica Mod" width="900" />
 </p>
 
-<p align="center">
-  <img src="screenshots/logo.png" alt="Helena Magic World Logo" width="220" />
-</p>
 
 ---
 
