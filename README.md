@@ -237,3 +237,12 @@ Projeto oficial Helena Magic World.
 # HelenaMagicWorld---VarinhaMagicaMod--Minecraft-1.20.1---Forge
 HelenaMagicWorld - VarinhaMagicaMod- Minecraft 1.20.1 - Forge
 >>>>>>> 5a4959f944fd0dd29755b662d29775cf6dbba069
+
+---
+# IMPORTANTE: PARA O DISTANT HORIZONS FUNCIONAR PRECISA JDK 21.0.10
+
+- use java 2
+- use o codigo no java:    -Xms4G -Xmx6G -XX:+UseZGC 
+- coloque entre 6 e 8gb de ram
+
+---
