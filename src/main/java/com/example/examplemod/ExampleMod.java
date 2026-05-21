@@ -69,15 +69,15 @@ public class ExampleMod {
     ) {
 
         level.sendParticles(
-                ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                ParticleTypes.DRAGON_BREATH,
                 pos.getX() + 0.5,
                 pos.getY() + 1,
                 pos.getZ() + 0.5,
-                40,
+                30,
                 0.4,
                 0.4,
                 0.4,
-                0.02
+                0.03
         );
 
         level.sendParticles(
