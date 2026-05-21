@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Helena Magic World - Varinha Magica Mod
 
 <p align="center">
@@ -235,3 +236,7 @@ Projeto oficial Helena Magic World.
 <p align="center">
   <img src="screenshots/Wallpaper HelenaMagicWorld.png" alt="Helena Magic World Wallpaper" width="900" />
 </p>
+=======
+# HelenaMagicWorld---VarinhaMagicaMod--Minecraft-1.20.1---Forge
+HelenaMagicWorld - VarinhaMagicaMod- Minecraft 1.20.1 - Forge
+>>>>>>> 5a4959f944fd0dd29755b662d29775cf6dbba069
