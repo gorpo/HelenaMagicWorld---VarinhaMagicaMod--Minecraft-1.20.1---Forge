@@ -11,6 +11,10 @@
   <img src="screenshots/banner.png" alt="Magic Hemp" width="720" />
 </p>
 
+Mod premium para **Minecraft Forge 1.20.1** que transforma a experiencia do Minecraft com varinha magica, menus interativos, transformacao de blocos, spawn de itens, vilas, construcoes, comandos, sistema premium e muito mais.
+
+Com a poderosa **Varinha Magica do Magic Hemp**, o jogador ganha acesso a sistemas especiais capazes de alterar o mundo em tempo real: transformar blocos comuns em recursos raros, controlar criaturas, gerar vilas, spawnar estruturas, acessar menus premium interativos e desbloquear funcoes avancadas diretamente dentro do jogo.
+
 > **MOD FEITO PARA SER USADO JUNTO COM O MAGICHEMP RESOURCE PACK 1.20.1:**  
 > **Resource pack oficial:** https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1  
 > **O mod entrega a jogabilidade premium: varinha, menus, transformacoes, spawns, vilas, construcoes e comandos. O resource pack entrega a camada visual: texturas, modelos, blocos, itens e atmosfera. Juntos eles formam o pacote premium integrado Magic Hemp, uma experiencia quase completa enquanto o shader oficial ainda esta em desenvolvimento.**
@@ -26,8 +30,6 @@
 
 **Ordem obrigatoria do resource pack no Minecraft, de cima para baixo:**  
 **1. `MagicHemp_1.20.1_Premium526X` -> 2. `MagicHemp_1.20.1_models` -> 3. `MagicHemp_1.20._addon` -> 4. `MagicHemp_1.20.1_bonus`**
-
-Mod premium para **Minecraft Forge 1.20.1**, com varinha magica, menus interativos, transformacao de blocos, spawn de itens, vilas, construcoes, comandos, sistema premium e muito mais.
 
 ---
 
@@ -51,6 +53,21 @@ O **MagicHemp Resource Pack** e a metade visual deste projeto. Ele foi feito par
 **Use os dois juntos:** este mod controla os sistemas e a jogabilidade; o resource pack transforma o visual para fechar o Minecraft premium Magic Hemp.
 
 ---
+
+## Sistemas do mod
+
+Explore um sistema magico onde:
+
+- blocos podem evoluir em materiais valiosos
+- criaturas hostis podem ser pacificadas
+- estruturas podem surgir instantaneamente
+- vilas aparecem ao seu redor
+- menus premium controlam o mundo inteiro
+- comandos especiais desbloqueiam funcoes ocultas
+- poderes magicos transformam sua gameplay
+
+---
+
 ## Varinha Magica
 
 ![Varinha](screenshots/varinha.png)
