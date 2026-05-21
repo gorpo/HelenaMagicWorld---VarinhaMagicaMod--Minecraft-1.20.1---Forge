@@ -43,21 +43,20 @@ public class ClientEvents {
             Minecraft minecraft =
                     Minecraft.getInstance();
 
-            if (minecraft.player == null) {
-                return;
-            }
-
-            if (minecraft.screen
-                    instanceof PremiumMenuScreen) {
-                return;
-            }
-
             while (KeyBindings.OPEN_MENU_KEY
                     .consumeClick()) {
 
-                minecraft.setScreen(
-                        new PremiumMenuScreen()
-                );
+                if (minecraft.screen instanceof PremiumMenuScreen) {
+                    minecraft.setScreen(null);
+                    continue;
+                }
+
+                if (minecraft.player == null
+                        || minecraft.screen != null) {
+                    continue;
+                }
+
+                minecraft.setScreen(new PremiumMenuScreen());
             }
         }
     }

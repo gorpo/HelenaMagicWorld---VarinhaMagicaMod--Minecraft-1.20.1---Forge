@@ -1,6 +1,9 @@
 package com.example.examplemod.event;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -901,7 +904,117 @@ public class PremiumBlocks {
             return true;
         }
 
+        Block fallbackBlock =
+                fallbackBlockFor(state);
+
+        if (fallbackBlock != null) {
+            change(level, pos, state, fallbackBlock);
+            return true;
+        }
+
         return false;
+    }
+
+    private static Block fallbackBlockFor(
+            BlockState state
+    ) {
+
+        Block block =
+                state.getBlock();
+
+        if (state.isAir()
+                || state.is(Blocks.WATER)
+                || state.is(Blocks.LAVA)
+                || block == Blocks.MOVING_PISTON
+                || block == Blocks.PISTON_HEAD
+                || block == Blocks.END_PORTAL
+                || block == Blocks.NETHER_PORTAL
+                || block == Blocks.END_GATEWAY) {
+            return null;
+        }
+
+        ResourceLocation blockId =
+                BuiltInRegistries.BLOCK.getKey(block);
+
+        String id =
+                blockId.toString();
+
+        if (id.contains("sand")
+                || id.contains("beach")
+                || id.contains("gravel")
+                || id.contains("clay")
+                || id.contains("terracotta")) {
+            return Blocks.GLASS;
+        }
+
+        if (state.is(BlockTags.LEAVES)
+                || id.contains("leaf")
+                || id.contains("leaves")
+                || id.contains("vine")
+                || id.contains("moss")
+                || id.contains("azalea")) {
+            return Blocks.EMERALD_BLOCK;
+        }
+
+        if (state.is(BlockTags.LOGS)
+                || id.contains("stem")
+                || id.contains("hyphae")
+                || id.contains("wood")) {
+            return Blocks.GOLD_BLOCK;
+        }
+
+        if (id.contains("ore")
+                || id.contains("raw_")
+                || id.contains("deepslate")) {
+            return Blocks.DIAMOND_ORE;
+        }
+
+        if (state.is(BlockTags.MINEABLE_WITH_SHOVEL)
+                || id.contains("dirt")
+                || id.contains("mud")
+                || id.contains("snow")
+                || id.contains("ice")) {
+            return Blocks.MOSS_BLOCK;
+        }
+
+        if (state.is(BlockTags.MINEABLE_WITH_AXE)
+                || id.contains("plank")
+                || id.contains("bamboo")) {
+            return Blocks.HONEYCOMB_BLOCK;
+        }
+
+        if (state.is(BlockTags.MINEABLE_WITH_HOE)
+                || id.contains("wool")
+                || id.contains("sculk")) {
+            return Blocks.GREEN_CONCRETE;
+        }
+
+        if (id.contains("glass")) {
+            return Blocks.SAND;
+        }
+
+        if (id.contains("copper")
+                || id.contains("iron")
+                || id.contains("gold")
+                || id.contains("diamond")
+                || id.contains("emerald")
+                || id.contains("netherite")) {
+            return Blocks.AMETHYST_BLOCK;
+        }
+
+        if (state.is(BlockTags.MINEABLE_WITH_PICKAXE)
+                || id.contains("stone")
+                || id.contains("brick")
+                || id.contains("quartz")
+                || id.contains("blackstone")
+                || id.contains("basalt")
+                || id.contains("prismarine")
+                || id.contains("purpur")
+                || id.contains("end_")) {
+            return Blocks.AMETHYST_BLOCK;
+        }
+
+        return Blocks.SEA_LANTERN;
     }
 
     private static void change(

@@ -13,7 +13,7 @@ public class PlayerJoinEvents {
 
         event.getEntity().sendSystemMessage(
                 Component.literal(
-                        "§6✨ Dica: coloque 3 gravetos na vertical para criar a Magic Hemp!"
+                        "Pressione H para abrir o menu  VarinhaMagica"
                 )
         );
     }

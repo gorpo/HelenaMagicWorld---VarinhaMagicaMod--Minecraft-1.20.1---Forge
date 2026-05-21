@@ -43,7 +43,7 @@ public class MobEvents {
                         .getMainHandItem();
 
         if (held.getItem()
-                != ExampleMod.MAGIC_HEMP.get())
+                != ExampleMod.VARINHA_MAGICA.get())
             return;
 
         event.setCanceled(true);

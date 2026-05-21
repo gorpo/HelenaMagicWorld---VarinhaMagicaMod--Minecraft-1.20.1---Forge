@@ -6,9 +6,9 @@ import net.minecraft.world.item.Items;
 
 import java.util.List;
 
-public final class MagicHempControlCenter {
+public final class VarinhaMagicaControlCenter {
 
-    private MagicHempControlCenter() {
+    private VarinhaMagicaControlCenter() {
     }
 
     public static void add(

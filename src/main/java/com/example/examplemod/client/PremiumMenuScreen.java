@@ -6,7 +6,7 @@ import com.example.examplemod.client.menus.BossControlMenu;
 import com.example.examplemod.client.menus.DimensionMenu;
 import com.example.examplemod.client.menus.DungeonSpawnerMenu;
 import com.example.examplemod.client.menus.LuckyBlockMenu;
-import com.example.examplemod.client.menus.MagicHempControlCenter;
+import com.example.examplemod.client.menus.VarinhaMagicaControlCenter;
 import com.example.examplemod.client.menus.MobSpawnerMenu;
 import com.example.examplemod.client.menus.NPCMenu;
 import com.example.examplemod.client.menus.ParticleEffectsMenu;
@@ -23,7 +23,10 @@ import com.example.examplemod.client.menus.TrollMenu;
 import com.example.examplemod.client.menus.WaveSurvivalMenu;
 import com.example.examplemod.client.menus.WeatherControlMenu;
 import com.example.examplemod.client.menus.WorldEventsMenu;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -31,6 +34,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,6 +51,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class PremiumMenuScreen extends Screen {
 
@@ -82,13 +93,21 @@ public class PremiumMenuScreen extends Screen {
     private final MenuTab activeTab;
 
     private static boolean commandMenusEnabled =
-            false;
+            true;
+
+    private static SavedTeleport savedTeleport;
 
     private int itemGridScroll =
             0;
 
     private int itemCategoryIndex =
             0;
+
+    private String itemSearchText =
+            "";
+
+    private boolean itemSearchFocused =
+            false;
 
     private static final String[] ITEM_CATEGORIES =
             new String[] {
@@ -152,7 +171,7 @@ public class PremiumMenuScreen extends Screen {
     public PremiumMenuScreen(
             MenuTab activeTab
     ) {
-        super(Component.literal("Magic Hemp INFO"));
+        super(Component.literal("Helena Magic World"));
         this.activeTab = activeTab;
     }
 
@@ -209,7 +228,7 @@ public class PremiumMenuScreen extends Screen {
         }
 
         else if (activeTab == MenuTab.CONTROL_CENTER) {
-            MagicHempControlCenter.add(premiumEntries);
+            VarinhaMagicaControlCenter.add(premiumEntries);
         }
 
         else if (activeTab == MenuTab.MOB_SPAWNER) {
@@ -793,7 +812,7 @@ public class PremiumMenuScreen extends Screen {
 
         return "summon "
                 + peacefulId
-                + " ~ ~ ~ {Tags:[\"MagicHempPremiumEnemy\",\"MagicHempOriginalEnemy="
+                + " ~ ~ ~ {Tags:[\"VarinhaMagicaPremiumEnemy\",\"VarinhaMagicaOriginalEnemy="
                 + originalEnemyId
                 + "\"],ActiveEffects:["
                 + effect(24, 0)
@@ -864,7 +883,7 @@ public class PremiumMenuScreen extends Screen {
 
         guiGraphics.drawCenteredString(
                 font,
-                "Magic Hemp INFO",
+                "Helena Magic World",
                 width / 2,
                 y + 8,
                 NEON
@@ -879,6 +898,7 @@ public class PremiumMenuScreen extends Screen {
         );
 
         drawTabs(guiGraphics, mouseX, mouseY);
+        drawCloseButton(guiGraphics, mouseX, mouseY);
 
         if (activeTab == MenuTab.WAND) {
             drawWandTab(guiGraphics, mouseX, mouseY);
@@ -925,12 +945,13 @@ public class PremiumMenuScreen extends Screen {
                 getPanelX() + 16;
 
         drawItemCategoryTabs(guiGraphics, mouseX, mouseY);
+        drawItemSearch(guiGraphics, mouseX, mouseY);
 
         List<PremiumEntry> visibleEntries =
                 filteredItemEntries();
 
         int top =
-                getListTop() + 28;
+                getItemGridTop();
 
         int columns =
                 Math.max(1, (getPanelWidth() - 42) / 24);
@@ -1010,6 +1031,88 @@ public class PremiumMenuScreen extends Screen {
         }
     }
 
+    private void drawItemSearch(
+            GuiGraphics guiGraphics,
+            int mouseX,
+            int mouseY
+    ) {
+
+        int x =
+                getItemSearchX();
+
+        int y =
+                getItemSearchY();
+
+        int width =
+                getItemSearchWidth();
+
+        boolean hovered =
+                mouseX >= x
+                        && mouseX <= x + width
+                        && mouseY >= y
+                        && mouseY <= y + 18;
+
+        drawInsetBox(
+                guiGraphics,
+                x,
+                y,
+                width,
+                18
+        );
+
+        if (hovered || itemSearchFocused) {
+            guiGraphics.fill(
+                    x + 1,
+                    y + 1,
+                    x + width - 1,
+                    y + 17,
+                    itemSearchFocused ? 0x66305030 : 0x33202020
+            );
+        }
+
+        String text =
+                itemSearchText.isEmpty()
+                        ? "Pesquisar item..."
+                        : itemSearchText;
+
+        int color =
+                itemSearchText.isEmpty()
+                        ? 0xFF9A9A9A
+                        : WHITE;
+
+        guiGraphics.drawString(
+                font,
+                text,
+                x + 6,
+                y + 5,
+                color
+        );
+
+        if (itemSearchFocused
+                && (System.currentTimeMillis() / 500L) % 2L == 0L) {
+            int cursorX =
+                    x + 6 + font.width(itemSearchText);
+
+            guiGraphics.fill(
+                    cursorX,
+                    y + 4,
+                    cursorX + 1,
+                    y + 14,
+                    WHITE
+            );
+        }
+
+        if (!itemSearchText.isEmpty()) {
+            guiGraphics.drawString(
+                    font,
+                    "x",
+                    x + width - 12,
+                    y + 5,
+                    0xFFFFE0E0
+            );
+        }
+    }
+
     private void drawItemCategoryTabs(
             GuiGraphics guiGraphics,
             int mouseX,
@@ -1046,12 +1149,33 @@ public class PremiumMenuScreen extends Screen {
                 new ArrayList<>();
 
         for (PremiumEntry entry : premiumEntries) {
-            if (isItemInCategory(entry.getIconItem())) {
+            if (isItemInCategory(entry.getIconItem())
+                    && matchesItemSearch(entry)) {
                 entries.add(entry);
             }
         }
 
         return entries;
+    }
+
+    private boolean matchesItemSearch(PremiumEntry entry) {
+        String query =
+                itemSearchText.trim().toLowerCase(Locale.ROOT);
+
+        if (query.isEmpty()) {
+            return true;
+        }
+
+        Item item =
+                entry.getIconItem();
+
+        String itemId =
+                BuiltInRegistries.ITEM.getKey(item).toString();
+
+        return entry.getName().toLowerCase(Locale.ROOT).contains(query)
+                || entry.getEnglishName().toLowerCase(Locale.ROOT).contains(query)
+                || entry.getCategory().toLowerCase(Locale.ROOT).contains(query)
+                || itemId.toLowerCase(Locale.ROOT).contains(query);
     }
 
     private boolean isItemInCategory(
@@ -1202,7 +1326,7 @@ public class PremiumMenuScreen extends Screen {
 
         guiGraphics.drawString(
                 font,
-                "Varinha premium do Magic Hemp.",
+                "Varinha magica do Helena Magic World.",
                 textX,
                 boxY + 2,
                 WHITE
@@ -1237,6 +1361,26 @@ public class PremiumMenuScreen extends Screen {
                 104,
                 20,
                 "Spawnar varinha",
+                mouseX,
+                mouseY,
+                false
+        );
+
+    }
+
+    private void drawCloseButton(
+            GuiGraphics guiGraphics,
+            int mouseX,
+            int mouseY
+    ) {
+
+        drawMinecraftButton(
+                guiGraphics,
+                getCloseButtonX(),
+                getCloseButtonY(),
+                46,
+                16,
+                "Fechar",
                 mouseX,
                 mouseY,
                 false
@@ -1303,6 +1447,14 @@ public class PremiumMenuScreen extends Screen {
             return true;
         }
 
+        if (mouseX >= getCloseButtonX()
+                && mouseX <= getCloseButtonX() + 46
+                && mouseY >= getCloseButtonY()
+                && mouseY <= getCloseButtonY() + 16) {
+            minecraft.setScreen(null);
+            return true;
+        }
+
         if (activeTab == MenuTab.WAND
                 && mouseX >= getWandButtonX()
                 && mouseX <= getWandButtonX() + 104
@@ -1314,6 +1466,25 @@ public class PremiumMenuScreen extends Screen {
         }
 
         if (activeTab == MenuTab.SPAWN_ITEMS) {
+            if (isInsideItemSearch(mouseX, mouseY)) {
+                itemSearchFocused =
+                        true;
+
+                if (!itemSearchText.isEmpty()
+                        && mouseX >= getItemSearchX() + getItemSearchWidth() - 18) {
+                    itemSearchText =
+                            "";
+
+                    itemGridScroll =
+                            0;
+                }
+
+                return true;
+            }
+
+            itemSearchFocused =
+                    false;
+
             int clickedCategory =
                     getClickedItemCategory(mouseX, mouseY);
 
@@ -1375,7 +1546,7 @@ public class PremiumMenuScreen extends Screen {
         }
 
         minecraft.getConnection().sendCommand(
-                "give @s examplemod:magic_hemp 1"
+                "give @s examplemod:varinha_magica 1"
         );
     }
 
@@ -1481,7 +1652,7 @@ public class PremiumMenuScreen extends Screen {
                 getPanelX() + 16;
 
         int top =
-                getListTop() + 28;
+                getItemGridTop();
 
         int columns =
                 Math.max(1, (getPanelWidth() - 42) / 24);
@@ -1552,6 +1723,33 @@ public class PremiumMenuScreen extends Screen {
         return -1;
     }
 
+    private int getItemSearchX() {
+        return getPanelX() + 16;
+    }
+
+    private int getItemSearchY() {
+        return getListTop() + 24;
+    }
+
+    private int getItemSearchWidth() {
+        return getPanelWidth() - 32;
+    }
+
+    private int getItemGridTop() {
+        return getListTop() + 48;
+    }
+
+    private boolean isInsideItemSearch(
+            double mouseX,
+            double mouseY
+    ) {
+
+        return mouseX >= getItemSearchX()
+                && mouseX <= getItemSearchX() + getItemSearchWidth()
+                && mouseY >= getItemSearchY()
+                && mouseY <= getItemSearchY() + 18;
+    }
+
     private int getCommandsButtonX() {
         return getPanelX() + getPanelWidth() / 2 - 78;
     }
@@ -1572,7 +1770,7 @@ public class PremiumMenuScreen extends Screen {
                     Math.max(1, (getPanelWidth() - 42) / 24);
 
             int visibleRows =
-                    Math.max(1, (getListBottom() - getListTop() - 32) / 22);
+                    Math.max(1, (getListBottom() - getItemGridTop() - 4) / 22);
 
             int visibleEntries =
                     filteredItemEntries().size();
@@ -1604,6 +1802,84 @@ public class PremiumMenuScreen extends Screen {
 
     private int getWandButtonY() {
         return getPanelY() + getPanelHeight() - 42;
+    }
+
+    private int getCloseButtonX() {
+        return getPanelX() + getPanelWidth() - 58;
+    }
+
+    private int getCloseButtonY() {
+        return getPanelY() + 8;
+    }
+
+    @Override
+    public boolean keyPressed(
+            int keyCode,
+            int scanCode,
+            int modifiers
+    ) {
+
+        if (KeyBindings.OPEN_MENU_KEY != null
+                && KeyBindings.OPEN_MENU_KEY.matches(keyCode, scanCode)) {
+            minecraft.setScreen(null);
+            return true;
+        }
+
+        if (activeTab == MenuTab.SPAWN_ITEMS
+                && itemSearchFocused) {
+            if (keyCode == 259) {
+                if (!itemSearchText.isEmpty()) {
+                    itemSearchText =
+                            itemSearchText.substring(
+                                    0,
+                                    itemSearchText.length() - 1
+                            );
+
+                    itemGridScroll =
+                            0;
+                }
+
+                return true;
+            }
+
+            if (keyCode == 257
+                    || keyCode == 335) {
+                itemSearchFocused =
+                        false;
+
+                return true;
+            }
+        }
+
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean charTyped(
+            char codePoint,
+            int modifiers
+    ) {
+
+        if (activeTab == MenuTab.SPAWN_ITEMS
+                && itemSearchFocused
+                && isAllowedSearchCharacter(codePoint)
+                && itemSearchText.length() < 48) {
+            itemSearchText += codePoint;
+            itemGridScroll =
+                    0;
+
+            return true;
+        }
+
+        return super.charTyped(codePoint, modifiers);
+    }
+
+    private boolean isAllowedSearchCharacter(char codePoint) {
+        return Character.isLetterOrDigit(codePoint)
+                || codePoint == ' '
+                || codePoint == '_'
+                || codePoint == ':'
+                || codePoint == '-';
     }
 
     @Override
@@ -2131,9 +2407,298 @@ public class PremiumMenuScreen extends Screen {
             return;
         }
 
-        minecraft.getConnection().sendCommand(
-                command
+        if (command.startsWith("BIOME_TELEPORT:")) {
+            teleportToBiome(
+                    command.substring("BIOME_TELEPORT:".length())
+            );
+            return;
+        }
+
+        if (command.equals("RETURN_TELEPORT")) {
+            returnToSavedTeleport();
+            return;
+        }
+
+        minecraft.getConnection().sendCommand(command);
+    }
+
+    private void teleportToBiome(String biomeId) {
+        MinecraftServer server =
+                minecraft.getSingleplayerServer();
+
+        if (server == null
+                || minecraft.player == null) {
+            sendClientMessage("Teleporte direto so funciona no mundo singleplayer/integrado.");
+            return;
+        }
+
+        ServerPlayer serverPlayer =
+                server.getPlayerList().getPlayer(
+                        minecraft.player.getUUID()
+                );
+
+        if (serverPlayer == null) {
+            sendClientMessage("Jogador nao encontrado no servidor integrado.");
+            return;
+        }
+
+        ResourceLocation biomeLocation =
+                ResourceLocation.tryParse(biomeId);
+
+        if (biomeLocation == null) {
+            sendClientMessage("Bioma invalido: " + biomeId);
+            return;
+        }
+
+        ResourceKey<Biome> biomeKey =
+                ResourceKey.create(
+                        Registries.BIOME,
+                        biomeLocation
+                );
+
+        ServerLevel level =
+                levelForBiome(server, biomeId);
+
+        if (level == null) {
+            sendClientMessage("Dimensao do bioma nao esta carregada.");
+            return;
+        }
+
+        savedTeleport =
+                SavedTeleport.from(serverPlayer);
+
+        Pair<BlockPos, net.minecraft.core.Holder<Biome>> result =
+                level.findClosestBiome3d(
+                        holder -> holder.is(biomeKey),
+                        serverPlayer.blockPosition(),
+                        6400,
+                        32,
+                        64
+                );
+
+        if (result == null) {
+            sendClientMessage("Nao encontrei esse bioma num raio de 6400 blocos.");
+            return;
+        }
+
+        BlockPos biomePos =
+                result.getFirst();
+
+        BlockPos safePos =
+                safeTeleportPos(level, biomePos);
+
+        serverPlayer.teleportTo(
+                level,
+                safePos.getX() + 0.5D,
+                safePos.getY(),
+                safePos.getZ() + 0.5D,
+                serverPlayer.getYRot(),
+                serverPlayer.getXRot()
         );
+
+        minecraft.setScreen(null);
+        sendClientMessage("Teleportado para " + biomeId + ". Use Voltar para retornar.");
+    }
+
+    private BlockPos safeTeleportPos(
+            ServerLevel level,
+            BlockPos biomePos
+    ) {
+
+        int x =
+                biomePos.getX();
+
+        int z =
+                biomePos.getZ();
+
+        level.getChunk(
+                x >> 4,
+                z >> 4
+        );
+
+        BlockPos surfacePos =
+                level.getHeightmapPos(
+                        Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                        new BlockPos(x, biomePos.getY(), z)
+                );
+
+        int minY =
+                level.getMinBuildHeight() + 1;
+
+        int maxY =
+                level.getMaxBuildHeight() - 2;
+
+        int startY =
+                Math.max(
+                        minY,
+                        Math.min(surfacePos.getY(), maxY)
+                );
+
+        BlockPos.MutableBlockPos feet =
+                new BlockPos.MutableBlockPos();
+
+        for (int y = startY; y <= maxY; y++) {
+            feet.set(x, y, z);
+
+            if (isSafeTeleportFeet(level, feet)) {
+                return feet.immutable();
+            }
+        }
+
+        for (int y = startY - 1; y >= minY; y--) {
+            feet.set(x, y, z);
+
+            if (isSafeTeleportFeet(level, feet)) {
+                return feet.immutable();
+            }
+        }
+
+        return new BlockPos(
+                x,
+                startY,
+                z
+        );
+    }
+
+    private boolean isSafeTeleportFeet(
+            ServerLevel level,
+            BlockPos feet
+    ) {
+
+        BlockPos head =
+                feet.above();
+
+        BlockPos below =
+                feet.below();
+
+        return isClearForPlayer(level, feet)
+                && isClearForPlayer(level, head)
+                && isStableTeleportSupport(level, below);
+    }
+
+    private boolean isClearForPlayer(
+            ServerLevel level,
+            BlockPos pos
+    ) {
+
+        return level.getBlockState(pos)
+                .getCollisionShape(level, pos)
+                .isEmpty()
+                && level.getFluidState(pos).isEmpty();
+    }
+
+    private boolean isStableTeleportSupport(
+            ServerLevel level,
+            BlockPos pos
+    ) {
+
+        return !level.getBlockState(pos)
+                .getCollisionShape(level, pos)
+                .isEmpty()
+                || level.getFluidState(pos).is(FluidTags.WATER);
+    }
+
+    private void returnToSavedTeleport() {
+        MinecraftServer server =
+                minecraft.getSingleplayerServer();
+
+        if (server == null
+                || minecraft.player == null) {
+            sendClientMessage("Voltar so funciona no mundo singleplayer/integrado.");
+            return;
+        }
+
+        if (savedTeleport == null) {
+            sendClientMessage("Nenhuma posicao anterior salva.");
+            return;
+        }
+
+        ServerPlayer serverPlayer =
+                server.getPlayerList().getPlayer(
+                        minecraft.player.getUUID()
+                );
+
+        if (serverPlayer == null) {
+            sendClientMessage("Jogador nao encontrado no servidor integrado.");
+            return;
+        }
+
+        ServerLevel level =
+                server.getLevel(savedTeleport.dimension);
+
+        if (level == null) {
+            sendClientMessage("Dimensao anterior nao esta carregada.");
+            return;
+        }
+
+        serverPlayer.teleportTo(
+                level,
+                savedTeleport.x,
+                savedTeleport.y,
+                savedTeleport.z,
+                savedTeleport.yRot,
+                savedTeleport.xRot
+        );
+
+        minecraft.setScreen(null);
+        sendClientMessage("Voltou para a posicao anterior.");
+    }
+
+    private ServerLevel levelForBiome(
+            MinecraftServer server,
+            String biomeId
+    ) {
+
+        if (biomeId.contains("nether")
+                || biomeId.contains("basalt")
+                || biomeId.contains("crimson")
+                || biomeId.contains("warped")
+                || biomeId.contains("soul_sand")) {
+            return server.getLevel(
+                    net.minecraft.world.level.Level.NETHER
+            );
+        }
+
+        if (biomeId.contains("end")
+                || biomeId.contains("the_void")) {
+            return server.getLevel(
+                    net.minecraft.world.level.Level.END
+            );
+        }
+
+        return server.getLevel(
+                net.minecraft.world.level.Level.OVERWORLD
+        );
+    }
+
+    private void sendClientMessage(String message) {
+        if (minecraft != null
+                && minecraft.player != null) {
+            minecraft.player.sendSystemMessage(
+                    Component.literal(message)
+            );
+        }
+    }
+
+    private record SavedTeleport(
+            ResourceKey<net.minecraft.world.level.Level> dimension,
+            double x,
+            double y,
+            double z,
+            float yRot,
+            float xRot
+    ) {
+
+        static SavedTeleport from(ServerPlayer player) {
+            return new SavedTeleport(
+                    player.serverLevel().dimension(),
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    player.getYRot(),
+                    player.getXRot()
+            );
+        }
     }
 
     private LivingEntity createPreviewEntity(

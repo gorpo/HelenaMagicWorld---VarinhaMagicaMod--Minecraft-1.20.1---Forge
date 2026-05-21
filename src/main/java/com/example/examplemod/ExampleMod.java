@@ -31,9 +31,9 @@ public class ExampleMod {
                     MODID
             );
 
-    public static final RegistryObject<Item> MAGIC_HEMP =
+    public static final RegistryObject<Item> VARINHA_MAGICA =
             ITEMS.register(
-                    "magic_hemp",
+                    "varinha_magica",
                     () -> new Item(
                             new Item.Properties()
                                     .stacksTo(1)
@@ -111,7 +111,7 @@ public class ExampleMod {
                 == CreativeModeTabs.TOOLS_AND_UTILITIES) {
 
             event.accept(
-                    MAGIC_HEMP
+                    VARINHA_MAGICA
             );
         }
     }

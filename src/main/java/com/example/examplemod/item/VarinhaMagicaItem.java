@@ -1,4 +1,4 @@
 package com.example.examplemod.item;
 
-public class MagicHempItem {
+public class VarinhaMagicaItem {
 }

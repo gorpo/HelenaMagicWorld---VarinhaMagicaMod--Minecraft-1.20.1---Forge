@@ -1,182 +1,237 @@
-﻿# Magic Hemp
+# Helena Magic World - Varinha Magica Mod
 
 <p align="center">
-  <img src="https://img.shields.io/badge/18%2B-MAIORES%20DE%2018%20ANOS-red?style=for-the-badge" alt="Aviso 18+" />
-</p>
-
-> **AVISO IMPORTANTE: ESTE PROJETO E INDICADO PARA MAIORES DE 18 ANOS.**  
-> **O tema Magic Hemp, sua identidade visual e sua proposta premium foram pensados para publico adulto.**
-
-<p align="center">
-  <img src="screenshots/banner.png" alt="Magic Hemp" width="720" />
-</p>
-
-Mod premium para **Minecraft Forge 1.20.1** que transforma a experiencia do Minecraft com varinha magica, menus interativos, transformacao de blocos, spawn de itens, vilas, construcoes, comandos, sistema premium e muito mais.
-
-Com a poderosa **Varinha Magica do Magic Hemp**, o jogador ganha acesso a sistemas especiais capazes de alterar o mundo em tempo real: transformar blocos comuns em recursos raros, controlar criaturas, gerar vilas, spawnar estruturas, acessar menus premium interativos e desbloquear funcoes avancadas diretamente dentro do jogo.
-
-> **MOD FEITO PARA SER USADO JUNTO COM O MAGICHEMP RESOURCE PACK 1.20.1:**  
-> **Resource pack oficial:** https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1  
-> **O mod entrega a jogabilidade premium: varinha, menus, transformacoes, spawns, vilas, construcoes e comandos. O resource pack entrega a camada visual: texturas, modelos, blocos, itens e atmosfera. Juntos eles formam o pacote premium integrado Magic Hemp, uma experiencia quase completa enquanto o shader oficial ainda esta em desenvolvimento.**
-
-<p align="center">
-  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_Premium526X/pack.png" alt="Premium526X" width="96" />
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_models/pack.png" alt="Models" width="96" />
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20._addon/pack.png" alt="Addon" width="96" />
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/MagicHemp_1.20.1_bonus/pack.png" alt="Bonus" width="96" />
-  </a>
-</p>
-
-**Ordem obrigatoria do resource pack no Minecraft, de cima para baixo:**  
-**1. `MagicHemp_1.20.1_Premium526X` -> 2. `MagicHemp_1.20.1_models` -> 3. `MagicHemp_1.20._addon` -> 4. `MagicHemp_1.20.1_bonus`**
-
----
-
-## MagicHemp Resource Pack
-
-O **MagicHemp Resource Pack** e a metade visual deste projeto. Ele foi feito para ser usado junto com este mod e completa a identidade Magic Hemp com texturas premium, modelos, vegetacao, blocos, itens e acabamento visual para Minecraft 1.20.1.
-
-<p align="center">
-  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/banner.png" alt="MagicHemp Resource Pack" width="720" />
-  </a>
+  <img src="screenshots/bannerModvarinhaMagica.png" alt="Helena Magic World Varinha Magica Mod" width="900" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1">
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/1.png" alt="Screenshot Resource Pack 1" width="330" />
-    <img src="https://raw.githubusercontent.com/gorpo/MagicHemp_ResourcePack-Minecraft_1.20.1/main/screenshots/2.png" alt="Screenshot Resource Pack 2" width="330" />
-  </a>
+  <img src="screenshots/logo.png" alt="Helena Magic World Logo" width="220" />
 </p>
 
-**Use os dois juntos:** este mod controla os sistemas e a jogabilidade; o resource pack transforma o visual para fechar o Minecraft premium Magic Hemp.
+---
+
+# Helena Magic World
+
+Mod premium para Minecraft Forge 1.20.1 focado em magia, fantasia medieval, sistemas especiais, menus customizados, estruturas, efeitos magicos e gameplay fantasy completo.
+
+O projeto adiciona uma poderosa varinha magica e diversos sistemas interativos para transformar completamente a experiencia do Minecraft.
 
 ---
 
-## Sistemas do mod
+# Repositorios Oficiais
 
-Explore um sistema magico onde:
+## Mod Oficial
 
-- blocos podem evoluir em materiais valiosos
-- criaturas hostis podem ser pacificadas
-- estruturas podem surgir instantaneamente
-- vilas aparecem ao seu redor
-- menus premium controlam o mundo inteiro
-- comandos especiais desbloqueiam funcoes ocultas
-- poderes magicos transformam sua gameplay
+https://github.com/gorpo/HelenaMagicWorld---VarinhaMagicaMod--Minecraft-1.20.1---Forge
+
+## Resource Pack Oficial
+
+https://github.com/gorpo/HelenaMagicWorld---Resourcepack---Minecraft-1.20.1---Forge
 
 ---
 
-## Varinha Magica
+# Wallpaper Oficial
 
-![Varinha](screenshots/varinha.png)
+<p align="center">
+  <img src="screenshots/Wallpaper HelenaMagicWorld.png" alt="Wallpaper Helena Magic World" width="900" />
+</p>
 
-A varinha magica e o item principal do Magic Hemp.  
-Ela permite acessar os sistemas do mod, transformar blocos e interagir com criaturas de forma especial.
-
----
-
-## Blocos
-
-![Blocos](screenshots/blocos.png)
-
-Menu de blocos naturais e minerios.  
-Aqui ficam os blocos que podem fazer parte do sistema magico de transformacao e interacao.
+Wallpaper oficial em alta resolucao criado para desktop e divulgacao do projeto Helena Magic World.
 
 ---
 
-## Inimigos
+# Varinha Magica
 
-![Inimigos](screenshots/inimigos.png)
+<p align="center">
+  <img src="screenshots/logo.png" alt="Varinha Magica Helena Magic World" width="260" />
+</p>
 
-Menu de inimigos pacificados.  
-Criaturas hostis podem ganhar comportamento especial dentro do sistema premium do mod.
+A Varinha Magica e o principal item do Helena Magic World.
 
----
+Ela permite:
 
-## Animais
-
-![Animais](screenshots/animais.png)
-
-Menu de animais premium.  
-Lista criaturas amigaveis e animais que fazem parte dos sistemas magicos do Magic Hemp.
-
----
-
-## Criados
-
-![Criados](screenshots/criados.png)
-
-Menu de objetos criados pelo jogador.  
-Organiza blocos e itens construidos, como pranchas, cercas, portoes e portas.
+- Abrir menus especiais
+- Ativar sistemas magicos
+- Transformar blocos
+- Spawnar estruturas
+- Teletransportar
+- Controlar eventos
+- Interagir com criaturas
+- Utilizar poderes especiais
+- Manipular o mundo
 
 ---
 
-## Itens
+# Sistemas do Mod
 
-![Itens](screenshots/itens.png)
-
-Menu de itens no estilo modo criativo.  
-Permite navegar por categorias e acessar diversos itens diretamente pela interface do mod.
-
----
-
-## Comandos
-
-![Comandos](screenshots/cmds.png)
-
-Menu para ativar sistemas que usam comandos.  
-Serve para liberar funcoes avancadas e menus especiais dentro do Magic Hemp.
-
----
-
-## Desativar Comandos
-
-![Desativar Comandos](screenshots/cmds_desativar.png)
-
-Tela para desativar menus por comando.  
-Ajuda no controle das funcoes premium e no gerenciamento dos sistemas ativos.
+- Sistema de magia
+- Menus customizados
+- Transformacao de blocos
+- Sistema de estruturas
+- Spawn de construcoes
+- Teleporte para biomas
+- Eventos especiais
+- Sistemas fantasy
+- Controle de clima
+- Manipulacao do tempo
+- Sistemas premium
+- Interacoes especiais
+- Gameplay magico
+- Recursos personalizados
 
 ---
 
-## Vilas
+# Screenshots
 
-![Vilas](screenshots/vilas.png)
+<table>
+<tr>
 
-Menu de vilas spawnaveis.  
-Permite gerar vilas vanilla como planicie, deserto, savana e neve diretamente pelo menu.
+<td align="center">
+<img src="screenshots/bannerModvarinhaMagica.png" width="420"><br>
+Sistema principal
+</td>
 
----
+<td align="center">
+<img src="screenshots/logo.png" width="260"><br>
+Varinha Magica
+</td>
 
-## Construcoes
-
-![Construcoes](screenshots/contrucoes.png)
-
-Menu de construcoes spawnaveis.  
-Permite gerar estruturas como Ancient City, Bastion, Desert Pyramid e End City.
-
----
-
-## Sistema
-
-![Sistema](screenshots/sistema.png)
-
-Central premium do mod.  
-Reune sistemas avancados como mob spawner, controle de clima, teleporte para biomas e dimensoes.
+</tr>
+</table>
 
 ---
 
-## Tecnologias
+# Compatibilidade
 
-- Java
+Compatibilidade oficial:
+
+- Minecraft Java Edition 1.20.1
+- Minecraft Forge 47.4.10
+- Java 17
+
+---
+
+# Tecnologias
+
+- Java 17
 - Minecraft Forge 1.20.1
 - Gradle
 - IntelliJ IDEA
 
 ---
 
-## Magic Hemp
+# Estrutura do Projeto
 
-Um mod magico, premium e poderoso para transformar a experiencia do Minecraft.
+```text
+HelenaMagicWorld/
+├── src/
+├── build.gradle
+├── gradle.properties
+├── settings.gradle
+├── screenshots/
+├── README.md
+└── gradlew
+```
 
+---
+
+# Instalacao
+
+## Instalacao Manual
+
+1. Baixe o mod
+2. Instale Forge 1.20.1
+3. Coloque o arquivo `.jar` em:
+
+```text
+.minecraft/mods
+```
+
+4. Instale tambem o resource pack oficial
+5. Abra o Minecraft
+6. Aproveite Helena Magic World
+
+---
+
+# Recomendacoes
+
+Melhor experiencia utilizando:
+
+- OptiFine
+- Oculus
+- Embeddium
+- Shaders
+- Resource Pack oficial Helena Magic World
+
+---
+
+# Objetivo do Projeto
+
+O Helena Magic World foi criado para transformar Minecraft em um mundo fantasy magico inspirado em aventuras, magia, castelos, livros encantados, estruturas especiais e exploracao premium.
+
+O projeto une:
+
+- Mod customizado
+- Resource pack premium
+- Atmosfera fantasy
+- Gameplay especial
+- Sistema visual integrado
+
+---
+
+# Performance
+
+Recomendacoes:
+
+- 8GB RAM ou mais
+- SSD recomendado
+- GPU dedicada recomendada
+- Drivers atualizados
+
+---
+
+# Problemas Comuns
+
+## O mod nao aparece
+
+Verifique:
+
+- Forge correto instalado
+- Java 17
+- Arquivo `.jar` dentro de `.minecraft/mods`
+
+---
+
+## Menus nao funcionam
+
+Confirme:
+
+- Resource pack instalado
+- Forge atualizado
+- Nenhum conflito com outros mods
+
+---
+
+# Desenvolvido por
+
+## GuiPaluch
+
+Projeto oficial Helena Magic World.
+
+---
+
+# Status Atual
+
+- Minecraft 1.20.1
+- Forge 47.4.10
+- Projeto ativo
+- Sistema modular
+- Integracao completa com resource pack oficial
+
+---
+
+# Obrigado por usar Helena Magic World
+
+<p align="center">
+  <img src="screenshots/Wallpaper HelenaMagicWorld.png" alt="Helena Magic World Wallpaper" width="900" />
+</p>

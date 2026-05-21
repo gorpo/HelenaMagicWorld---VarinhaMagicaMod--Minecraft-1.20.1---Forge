@@ -15,10 +15,10 @@ import net.minecraft.world.level.Level;
 public class PremiumEnemies {
 
     private static final String PREMIUM_TAG =
-            "MagicHempPremiumEnemy";
+            "VarinhaMagicaPremiumEnemy";
 
     private static final String ORIGINAL_TAG =
-            "MagicHempOriginalEnemy=";
+            "VarinhaMagicaOriginalEnemy=";
 
     public static boolean transform(
             Level level,
