@@ -3,6 +3,9 @@ package com.example.examplemod.event;
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.entity.*;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.*;
@@ -50,6 +53,15 @@ public class MobEvents {
 
         var target =
                 event.getTarget();
+
+        if (event.getEntity().isShiftKeyDown()) {
+            destroyTarget(
+                    level,
+                    target
+            );
+
+            return;
+        }
 
         if (PremiumEnemies.transform(
                 level,
@@ -197,6 +209,28 @@ public class MobEvents {
         else if (target instanceof Creeper creeper) {
             PremiumCreeper.transform(level, creeper);
         }
+    }
+
+    private static void destroyTarget(
+            Level level,
+            Entity target
+    ) {
+
+        if (target instanceof LivingEntity living) {
+            living.hurt(
+                    level.damageSources().magic(),
+                    Float.MAX_VALUE
+            );
+        }
+
+        if (!target.isRemoved()) {
+            target.discard();
+        }
+
+        ExampleMod.effects(
+                (ServerLevel) level,
+                target.blockPosition()
+        );
     }
 
     @SubscribeEvent

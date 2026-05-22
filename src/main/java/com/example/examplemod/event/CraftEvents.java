@@ -22,10 +22,6 @@ public class CraftEvents {
 
         if (level.isClientSide()) return;
 
-        if (event.getEntity().isShiftKeyDown()) {
-            return;
-        }
-
         if (event.getHand() != InteractionHand.MAIN_HAND)
             return;
 
@@ -42,6 +38,32 @@ public class CraftEvents {
 
         var state =
                 level.getBlockState(pos);
+
+        if (event.getEntity().isShiftKeyDown()) {
+            if (!state.isAir()) {
+                boolean destroyed =
+                        level.destroyBlock(
+                                pos,
+                                true,
+                                event.getEntity()
+                        );
+
+                if (!destroyed) {
+                    level.setBlock(
+                            pos,
+                            Blocks.AIR.defaultBlockState(),
+                            3
+                    );
+                }
+
+                ExampleMod.effects(
+                        (ServerLevel) level,
+                        pos
+                );
+            }
+
+            return;
+        }
 
         if (PremiumBlocks.transform(
                 level,

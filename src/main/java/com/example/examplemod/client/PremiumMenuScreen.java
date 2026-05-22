@@ -1342,7 +1342,7 @@ public class PremiumMenuScreen extends Screen {
 
         guiGraphics.drawString(
                 font,
-                "Shift impede transformacao de blocos.",
+                "Shift destroi blocos e alvos.",
                 textX,
                 boxY + 30,
                 WHITE
