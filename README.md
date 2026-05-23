@@ -26,6 +26,7 @@ https://github.com/gorpo/HelenaMagicWorld---VarinhaMagicaMod--Minecraft-1.20.1--
 
 https://github.com/gorpo/HelenaMagicWorld---Resourcepack---Minecraft-1.20.1---Forge
 
+- Seed recomendada: 8500081009970950196
 ---
 
 # Wallpaper Oficial
